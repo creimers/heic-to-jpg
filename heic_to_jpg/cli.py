@@ -25,6 +25,7 @@ def main(keep, src):
         subprocess.check_output(cmd)
     except Exception:
         click.secho("Program 'convert' not found!", fg="red")
+        return
 
     if os.path.isdir(src):
 
