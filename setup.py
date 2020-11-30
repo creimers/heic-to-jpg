@@ -53,7 +53,7 @@ setup(
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
-    url="https://github.com/creimers/heic_to_jpg",
+    url="https://github.com/creimers/heic-to-jpg",
     version="0.1.7",
     zip_safe=False,
 )
