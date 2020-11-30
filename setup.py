@@ -35,7 +35,7 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     description="Convert .heic images to .jpg",
-    entry_points={"console_script": ["heic-to-jpg=heic_to_jpg.cli:main",],},
+    entry_points={"console_script": ["heic2jpg=heic_to_jpg.cli:main",]},
     install_requires=requirements,
     license="MIT license",
     long_description=readme,
