@@ -35,7 +35,12 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     description="Convert .heic images to .jpg",
-    entry_points={"console_script": ["heic2jpg=heic_to_jpg.cli:main"]},
+    entry_points={
+        "console_scripts": [
+            "heic2jpg = heic_to_jpg.cli:main",
+            "heic-to-jpg = heic_to_jpg.cli:main",
+        ]
+    },
     install_requires=requirements,
     license="MIT license",
     long_description=readme,
@@ -43,11 +48,12 @@ setup(
     include_package_data=True,
     keywords="heic_to_jpg",
     name="heic_to_jpg",
+    py_modules=["heic_to_jpg"],
     packages=find_packages(include=["heic_to_jpg", "heic_to_jpg.*"]),
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/creimers/heic_to_jpg",
-    version="version='0.1.1'",
+    version="0.1.1",
     zip_safe=False,
 )
