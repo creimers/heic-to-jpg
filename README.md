@@ -4,6 +4,8 @@ CLI tool for converting `HEIC` images to `jpg`.
 
 Essentially, this is just a wrapper around imagemagick's [`convert`](https://imagemagick.org/script/convert.php) cli.
 
+👉 ⚠️ Please note that [imagemagick](https://imagemagick.org/script/download.php) is a prerequisite for this to work.
+
 Motivation: When transfering images from an iPhone to a Mac via airdrop, they are being transfered as `HEIC`. Oftentime though, another format (such as `jpg`) is required to further make use of those images.
 
 ## installation
