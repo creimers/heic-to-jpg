@@ -16,10 +16,10 @@ Motivation: When transfering images from an iPhone to a Mac via airdrop, they ar
 
 ## usage
 
-`heic-to-jpg -s ~/path/to/source [--keep]`
+`heic-to-jpg -s ~/path/to/source [--keep] [--debug None|Trace|All]`
 
 or
 
-`heic2jpg -s ~/path/to/source [--keep]`
+`heic2jpg -s ~/path/to/source [--keep] [--debug None|Trace|All]` 
 
 `~/path/to/source` can both be a directory or a single `.HEIC` file. Without the `--keep` flag, the original file is deleted after conversion.
