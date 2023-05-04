@@ -18,7 +18,13 @@ import click
     help="Source directory of images to process or path to single image",
     required=True,
 )
-def main(keep, src):
+@click.option(
+    "--debug",
+    default="None",
+    help="Print convert debug info",
+    type=click.Choice(["None", "Trace", "All"], case_sensitive=False),
+)
+def main(keep, src, debug):
     # check for 'convert'
     try:
         cmd = ["which", "convert"]
@@ -27,58 +33,48 @@ def main(keep, src):
         click.secho("Program 'convert' not found!", fg="red")
         return
 
+    image_to_convert = []
     if os.path.isdir(src):
-
         ###########
         # DIRECTORY
         ###########
-
-        image_to_convert = []
         for filename in os.listdir(src):
-            if filename.endswith(".heic") or filename.endswith(".HEIC"):
+            if filename.lower().endswith(".heic"):
                 absolute_filename = os.path.join(src, filename)
-                # convert_image(absolute_filename)
                 image_to_convert.append(absolute_filename)
-
-        pwd = os.getcwd()
-        os.chdir(src)
-        command = [
-            "convert",
-            "*.HEIC",
-            "-set",
-            "filename:base",
-            "%[basename]",
-            "%[filename:base].jpg",
-        ]
-        subprocess.call(command)
-        os.chdir(pwd)
-
-        # remove?
-        if not keep:
-            for filename in image_to_convert:
-                os.remove(filename)
-    elif src.endswith(".heic") or src.endswith(".HEIC"):
-
+        target = "*.[hH][eE][iI][cC]*"
+        src_dir = src
+    elif src.lower().endswith(".heic"):
         #############
         # SINGLE FILE
         #############
+        target = src
+        image_to_convert.append(src)
+        src_dir = os.path.abspath(os.path.dirname(src))
 
-        pwd = os.getcwd()
-        src_folder = os.path.abspath(os.path.dirname(src))
-        os.chdir(src_folder)
-        command = [
-            "convert",
-            src,
-            "-set",
-            "filename:base",
-            "%[basename]",
-            "%[filename:base].jpg",
-        ]
-        subprocess.call(command)
+    pwd = os.getcwd()
+    os.chdir(src_dir)
+
+    command = [
+        "convert",
+        "-debug",
+        debug,
+        target,
+        "-set",
+        "filename:base",
+        "%[basename]",
+        "%[filename:base].jpg",
+    ]
+    if debug in ("Trace", "All"):
+        print(f"{command=}")
+    subprocess.call(command)
+    if os.path.isdir(src):
         os.chdir(pwd)
 
-        if not keep:
-            os.remove(src)
+    # remove?
+    if not keep:
+        for filename in image_to_convert:
+            os.remove(filename)
 
 
 if __name__ == "__main__":
