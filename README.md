@@ -14,6 +14,8 @@ Motivation: When transfering images from an iPhone to a Mac via airdrop, they ar
 
 `pip install heic-to-jpg`
 
+(`pip3 install heic-to-jpg` for some; an up-to-date-ish python3 is recommended.)
+
 ## usage
 
 `heic-to-jpg -s ~/path/to/source [--keep] [--debug None|Trace|All]`
