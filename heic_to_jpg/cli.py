@@ -21,16 +21,16 @@ import click
 @click.option(
     "--debug",
     default="None",
-    help="Print convert debug info",
+    help="Print magick debug info",
     type=click.Choice(["None", "Trace", "All"], case_sensitive=False),
 )
 def main(keep, src, debug):
-    # check for 'convert'
+    # check for 'magick'
     try:
-        cmd = ["which", "convert"]
+        cmd = ["which", "magick"]
         subprocess.check_output(cmd)
     except Exception:
-        click.secho("Program 'convert' not found!", fg="red")
+        click.secho("Program 'magick' not found!", fg="red")
         return
 
     image_to_convert = []
@@ -56,7 +56,7 @@ def main(keep, src, debug):
     os.chdir(src_dir)
 
     command = [
-        "convert",
+        "magick",
         "-debug",
         debug,
         target,
